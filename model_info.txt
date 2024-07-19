@@ -1,0 +1,49 @@
+model1.1
+    specs:
+        self.model = Sequential([
+            Dense(128, input_dim=9, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.95
+    episodes: 30'000
+    results:
+        Player 1 wins: 960
+        Player 2 wins: 9
+        Draws: 21
+        Illegal moves: 10
+model 1.2
+    specs:
+        self.model = Sequential([
+            Dense(512, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.95
+    episodes: 15'000 roughly
+    results:
+        Player 1 wins: 950
+        Player 2 wins: 33
+        Draws: 4
+        Illegal moves: 13
+
+model 1.3
+     specs:
+        self.model = Sequential([
+            Dense(512, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.95
+     episodes: over 20'000 with pvp
+     results:
+        Player 1 wins: 667
+        Player 2 wins: 185
+        Draws: 102
+        Illegal moves: 46
