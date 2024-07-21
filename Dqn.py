@@ -9,8 +9,8 @@ from collections import deque
 class DQN:
     def __init__(self):
         self.model = Sequential([
-            Dense(128, input_dim=9, activation='relu'),
-            Dense(128, activation='relu'),
+            Dense(1024, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
             Dense(9, activation='linear')
         ])
         self.model.compile(optimizer='adam', loss='mse')

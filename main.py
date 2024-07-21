@@ -28,16 +28,17 @@ def play_game_pvp(epsilon, model, env):
     done = False
     total_reward = 0
     while not done:
+        cur_player = env.current_player
         if random.uniform(0, 1) < epsilon:
             action = random.choice([i for i in range(9)])
         else:
-            correct_state = state if env.current_player == 1 else state.copy()*-1
+            correct_state = state if cur_player == 1 else state.copy()*-1
             q_values = model.model.predict(correct_state.reshape(1, -1), verbose=0)
             action = np.argmax(q_values[0])
         next_state, reward, done = env.step_pvp(action)
-        model.remember(state, action, reward, next_state, done)
+        model.remember(state.copy()*cur_player, action, reward, next_state.copy()*cur_player, done)
         if done and reward != -30:
-            model.remember(last_state, last_action, -reward, state, done)
+            model.remember(last_state.copy()*-1*cur_player, last_action, -reward, state.copy()*-1*cur_player, done)
         state = next_state
         total_reward += reward
         last_state = state
@@ -67,7 +68,7 @@ def train_dqn(episodes, file_name, epsilon=1.0, epsilon_min=0.1, epsilon_decay=0
             total_reward = play_game_pvp(epsilon, model, env)
         else:
             total_reward = play_game_pve(epsilon, model, env)
-        replay_losses = model.replay(epochs, batch_size, target_model)
+        replay_losses = model.replay(epochs, batch_size, target_model, smart_predict=-1)
         for x in replay_losses:
             total_losses.append(x)
 
@@ -88,4 +89,4 @@ def train_dqn(episodes, file_name, epsilon=1.0, epsilon_min=0.1, epsilon_decay=0
         writer.writerow(total_losses)
     model.model.save(model_file_name)
 
-train_dqn(4000, "model1.4", pvp=False)
+train_dqn(20000, "model1.12", pvp=True, epsilon=0.1)

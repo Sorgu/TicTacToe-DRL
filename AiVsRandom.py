@@ -3,7 +3,7 @@ import tensorflow as tf
 import numpy as np
 
 
-model = tf.keras.models.load_model("model1.3.keras")
+model = tf.keras.models.load_model("model1.12.keras")
 player1_wins = 0
 player2_wins = 0
 draws = 0

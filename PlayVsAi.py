@@ -4,7 +4,7 @@ import numpy as np
 
 env = TicTacToe()
 game_over = False
-model = tf.keras.models.load_model("model1.4.keras")
+model = tf.keras.models.load_model("model1.12.keras")
 state = env.reset()
 while not game_over:
     if env.current_player == 1:

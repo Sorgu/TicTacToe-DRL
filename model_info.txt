@@ -47,3 +47,107 @@ model 1.3
         Player 2 wins: 185
         Draws: 102
         Illegal moves: 46
+
+model1.4:
+    specs:
+        self.model = Sequential([
+            Dense(128, input_dim=9, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+
+# This model is the same as 1.4 except it uses smart_prediction in the replay.
+model1.5:
+    specs:
+        self.model = Sequential([
+            Dense(128, input_dim=9, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+
+# This model is the same as 1.5 except it has pvp enabled on train_dqn
+model1.6:
+    specs:
+        self.model = Sequential([
+            Dense(128, input_dim=9, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+
+# Same as last but with a change in how play_game_pvp() works to multiply the state by -1 so it is always from the right perspective
+model1.7:
+    specs:
+        self.model = Sequential([
+            Dense(128, input_dim=9, activation='relu'),
+            Dense(128, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+
+model 1.8
+    specs:
+        self.model = Sequential([
+            Dense(512, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+    results:
+        Worse than 1.7
+
+model 1.9
+    specs:
+        self.model = Sequential([
+            Dense(512, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+
+# Same as 1.9 but play_game_pvp now only gets called 50% of the time instead of 100% to let it get a high variety of moves while still getting higher quality moves than 100% random
+model 1.10
+
+
+model 1.11
+    specs:
+        self.model = Sequential([
+            Dense(512, input_dim=9, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+    results:
+        bad
+
+model 1.12
+    specs:
+        self.model = Sequential([
+            Dense(1024, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.5
+    results:
+        Player 1 wins: 971
+        Player 2 wins: 0
+        Draws: 21
+        Illegal moves: 8

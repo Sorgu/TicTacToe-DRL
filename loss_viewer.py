@@ -27,6 +27,5 @@ def scatter_plot(file):
     """
     plt.show()
 
-#scatter_plot("loss-history/loss-agent3.5c.keras.csv")
-#scatter_plot("loss-history/loss-agent3.5g.keras.csv")
-scatter_plot("loss-history/loss-model1.4.csv")
+
+scatter_plot("loss-history/loss-model1.12.csv")
