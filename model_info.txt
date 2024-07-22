@@ -151,3 +151,24 @@ model 1.12
         Player 2 wins: 0
         Draws: 21
         Illegal moves: 8
+
+model 1.13
+    specs:
+        self.model = Sequential([
+            Dense(1024, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.75
+model 1.14
+    specs:
+        self.model = Sequential([
+            Dense(1024, input_dim=9, activation='relu'),
+            Dense(512, activation='relu'),
+            Dense(9, activation='linear')
+        ])
+        self.model.compile(optimizer='adam', loss='mse')
+        self.replay_buffer = deque(maxlen=2000)
+        self.gamma = 0.25
